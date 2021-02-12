@@ -1,35 +1,44 @@
 @extends('layouts.app')
-
 @section('content')
+    <body >
 
-    @foreach($articles as $article )
-        <br>
-        <div class="container align-content-center">
-                        <div class="card-body text-center paper" style="color: black;font-family: 'Times New Roman';border-bottom: black dotted">
+    @foreach($events as $event )
 
-                            @auth
-                                    <h1 class="text text-right " title="delete" data-method="DELETE" ><a style="color: black" href="{{route('article.delete',[$article->id])}}">x</a></h1>
-                            @endauth
+        <div class="flip-box ">
+            <a href="{{ url('/events', $event->id) }}">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src="css/img/events/{{$event->image}}" alt="{{$event->title}}" style="width: 50vw;height: 25vw" >
+                </div>
+                <div class="flip-box-back ">
+                    <img class="obr" src="css/img/events/{{$event->image}}" alt="{{$event->title}}" style="width: 50vw;height: 25vw" >
+                    @if(fmod($event->id,2)==1)
 
-                            <h1>{{$article->title}}</h1>
-                            <p>
-                                {{ \Illuminate\Support\Str::limit($article->text,150) }}
-                            </p>
-                            <footer class="post-footer text-right">
-                                <h3 class="text-lg-left">@<strong>{{$article->user->name}}</strong></h3>
-                                <h6 class="text-sm-left">{{$article->comments->count()}} comments</h6>
-                                <h3 ><a href="{{url('articles',$article->id)}}" class="read-more" style="font-size:2vw;color: black">Read more...</a></h3>
-                                <time>
-                                    <h6 style="font-size:1vw;color: black">{{$article->created_at->format('d/m/Y')}}</h6>
-                                </time>
-                            </footer>
+                        <div class="nadpisHarry centered">
+                    <h1>{{$event->title}}</h1>
+                    <h3>{{$event->subtitle}}</h3>
+                        </div>
+                        @else
+                        <div class="nadpisCinema centered">
+                            <h2>{{$event->title}}</h2>
+                            <h4>{{$event->subtitle}}</h4>
                         </div>
 
-                    </div>
+                    @endif
 
+                </div>
+            </div>
+</a>
         </div>
-
 
     @endforeach
 
+    </body>
+
+
+
+
 @endsection
+
+
+

@@ -1,73 +1,99 @@
+@extends('layouts.app')
+@section('content')
 
-            @extends('layouts.app')
+    @if($event->id==1)
+        <body class="maraudersmap" >
+        <div id="div1"class="bg-text">
 
-            @section('content')
-                <body>
+            <h1>{{$event->title}}</h1>
+            <h2>{{$event->subtitle}}</h2>
+            <h4>Venue:{{$event->title}}</h4>
+            <h4> Date:{{$event->created_at->format('d/m/Y')}}</h4>
+            <button>Get description</button>
+        </div>
 
-                <div class="tab" style="margin-top: 5vw">
-                    <button class="tablinks" onclick="openText(event, 'Article')">Article</button>
-                    <button class="tablinks" onclick="openText(event, 'Comments')">Comments</button>
-                    <button class="tablinks" onclick="openText(event, 'New Comment')">Add new comment</button>
-                </div>
+        <script>
+            $(document).ready(function(){
+                $("button").click(function(){
+                    $("#div1").text("{{$event->description}}");
+                });
+            });
+        </script>
+        </body>
+    @elseif($event->id==2)
+        <body class="cinemaStars" >
+        <div id="div1"class="bg-text">
 
-                <div id="Article" class="tabcontent">
-                    <div class="container ">
+            <h1>{{$event->title}}</h1>
+            <h2>{{$event->subtitle}}</h2>
+            <h4>Venue:{{$event->title}}</h4>
+            <h4> Date:{{$event->created_at->format('d/m/Y')}}</h4>
+            <button>Get description</button>
+        </div>
 
-                        <div class="card-deck align-items-sm-center" >
-                            <div class="card paper" >
-                                <div class="card-body paper text-center " style="color:black">
-                                    <h2 class="nadpisCinema"> {{$article->title}}</h2>
-                                    <p>
-                                        {{ $article->text}}
-                                    </p>
-                                </div>
+        <script>
+            $(document).ready(function(){
+                $("button").click(function(){
+                    $("#div1").text("{{$event->description}}");
+                });
+            });
+        </script>
+        </body>
+    @elseif($event->id==3)
+        <body class="pride" >
+        <div id="div1"class="bg-text">
 
-                                <footer class="post-footer ">
-                                    <p class="text" style="float: left;color: black">@<strong>{{$article->user->name}}</strong></p>
-                                    <br>
-                                    <p class="text" style="color: black">{{$article->comments->count()}}comments</p>
-                                    <h5 class="text text-right " title="edit" ><a style="color: black" href="{{route('article.edit',[$article->id])}}">Edit</a></h5>
-                                    <time>
-                                        <small style="float: right; color: black">{{$article->created_at->format('d/m/Y')}}</small>
-                                    </time>
+            <h1>{{$event->title}}</h1>
+            <h2>{{$event->subtitle}}</h2>
+            <h4>Venue:{{$event->title}}</h4>
+            <h4> Date:{{$event->created_at->format('d/m/Y')}}</h4>
+            <button>Get description</button>
+        </div>
 
-                                </footer>
+        <script>
+            $(document).ready(function(){
+                $("button").click(function(){
+                    $("#div1").text("{{$event->description}}");
+                });
+            });
+        </script>
+        </body>
 
-                            </div>
-                </div>
-                    </div>
-                </div>
+   @else
+    <body class="james" >
+    <div id="div1"class="bg-text">
 
-                <div id="Comments" class="tabcontent">
-                   @include('comments.index')
+        <h1>{{$event->title}}</h1>
+        <h2>{{$event->subtitle}}</h2>
+        <h4>Venue:{{$event->title}}</h4>
+        <h4> Date:{{$event->created_at->format('d/m/Y')}}</h4>
+        <button>Get description</button>
+    </div>
 
-</div>
-                <div id="New Comment" class="tabcontent">
-                    @guest()
-                        <h3 style="color: red">For adding comments, you need to be logged in</h3>
-                    @endguest
-                    @auth()
-                        @include('comments.form')
-                    @endauth
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $("#div1").text("{{$event->description}}");
+            });
+        });
+    </script>
+    </body>
+    @endif
 
-                </div>
 
-                <script>
-                    function openText(evt, textName) {
-                        var i, tabcontent, tablinks;
-                        tabcontent = document.getElementsByClassName("tabcontent");
-                        for (i = 0; i < tabcontent.length; i++) {
-                            tabcontent[i].style.display = "none";
-                        }
-                        tablinks = document.getElementsByClassName("tablinks");
-                        for (i = 0; i < tablinks.length; i++) {
-                            tablinks[i].className = tablinks[i].className.replace(" active", "");
-                        }
-                        document.getElementById(textName).style.display = "block";
-                        evt.currentTarget.className += " active";
-                    }
-                </script>
 
-                </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @endsection
-
