@@ -1,4 +1,3 @@
-
 @if ($errors->any())
 
     <ul class="alert alert-danger" >
@@ -11,23 +10,30 @@
 
 @endif
 
-<form method="post" action="{{url('/comments')}}" >
+<form method="post" action="{{$action}}" >
     @csrf
+    @method($method)
+    <div class="card-body" style="font-family: 'Times New Roman'">
+        <div class="form-group row  " style="width:50vw">
+            <h4>Title section</h4>
+            <label for="name" class="row-cols-sm-4  col-form-label"></label><br>
 
-<div class="card-body" style="font-family: 'Times New Roman'">
-    <div class="form-group row  " style="width:50vw">
-        <h4>Comment section</h4>
-        <label for="name" class="row-cols-sm-4  col-form-label"></label><br>
-
-        <div class="col-sm-10" >
-            <input style="height: 15vw" type="text" class="form-control" id="text" name="text" placeholder="Type your comment here" >
+            <div class="col-sm-10" >
+                <input style="height: 15vw" type="text" class="form-control" id="text" name="title" placeholder="Type your comment here" >
+            </div>
         </div>
-    </div>
+        <div class="form-group row  " style="width:50vw">
+            <h4>Text section</h4>
+            <label for="name" class="row-cols-sm-4  col-form-label"></label><br>
 
-    <div class="form-group row">
-        <button type="submit" class="btn btn-dark">Add comment</button>
+            <div class="col-sm-10" >
+                <input style="height: 15vw" type="text" class="form-control" id="text" name="text" placeholder="Type your comment here" >
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <button type="submit" class="btn btn-dark">Edit article</button>
+        </div>
+        <input type="hidden" class="form-control" id="user_id" name="user_id"  value="{{auth()->user()->id}}">
     </div>
-    <input type="hidden" class="form-control" id="article_id" name="article_id"  value="{{$article->id}}">
-    <input type="hidden" class="form-control" id="user_id" name="user_id"  value="{{auth()->user()->id}}">
-</div>
 </form>
